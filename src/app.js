@@ -1,4 +1,4 @@
-function getWeather(){
+const getWeather = () => {
   let cityName = $('#cityName').val();
   let apiCall = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&mode=json&units=metric&appid=d568dc579415266146ede4b4f9de029b';
   $.getJSON(apiCall, (weatherData) => {
