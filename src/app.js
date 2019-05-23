@@ -1,6 +1,9 @@
-const getWeather = () => {
-  let cityName = $('#cityName').val();
-  let apiCall = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&mode=json&units=metric&appid=d568dc579415266146ede4b4f9de029b';
+
+let timer = null;
+let inputValue = document.querySelector('#cityName'),
+getWeather = () => {
+  cityName = $('#cityName').val();
+  apiCall = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&mode=json&units=metric&appid=${CONSTANTS.appId}`;
   $.getJSON(apiCall, (weatherData) => {
     let cityName = weatherData.name;
     let countryName = weatherData.sys.country;
@@ -16,23 +19,18 @@ const getWeather = () => {
   dateTime();
 }
 
-$('.search').click(getWeather);
-document.querySelector('#cityName').addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    getWeather();
-  }
-});
-
 function dateTime()
 {
-  let d_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-  let m_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
   let d = new Date();
   let curr_day = d.getDay();
   let curr_date = d.getDate();
   let sup = "";
+  let curr_month = d.getMonth();
+  let curr_year = d.getFullYear();
+
+  let curr_hour = d.getHours();
+  let curr_min = d.getMinutes();
+  let curr_sec = d.getSeconds();
   switch(curr_date)
   {
     case 1||21||31: sup="st";
@@ -44,13 +42,18 @@ function dateTime()
     default: sup="th"
       break;
   }
-  let curr_month = d.getMonth();
-  let curr_year = d.getFullYear();
-
-  let curr_hour = d.getHours();
-  let curr_min = d.getMinutes();
-  let curr_sec = d.getSeconds();
-
-
-  document.getElementById("time").innerHTML = `${d_names[curr_day]} ${curr_date}<SUP>${sup}</SUP> ${m_names[curr_month]} ${curr_year}<br><br>${curr_hour}:${curr_min}:${curr_sec}`
+  
+  document.getElementById("time").innerHTML = UTILS.getFormattedDateTime();
 }
+
+$('.search').click(getWeather);
+inputValue.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    getWeather();
+  }
+});
+
+$('#cityName').keydown(() => {
+  clearTimeout(timer); 
+  timer = setTimeout(getWeather, 1000)
+});
