@@ -15,6 +15,15 @@ const getWeather = () => {
     $("#country").text(countryName);
     $("#mintemp").html(`Minimum: ${tempMin}<span>&#8451;</span>`);
     $("#maxtemp").html(`Maximum: ${tempMax}<span>&#8451;</span>`);
+  })
+  .fail(() => { 
+    alert("City doesn't Exist!!");
+    $('#cityName').val("");
+    $("#city").text("");
+    $("#detail").text("");
+    $("#country").text("");
+    $("#mintemp").html("");
+    $("#maxtemp").html(""); 
   });
   dateTime();
 };

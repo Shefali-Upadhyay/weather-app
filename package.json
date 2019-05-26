@@ -3,18 +3,28 @@
   "version": "1.0.0",
   "description": "gives info about weather",
   "main": "index.js",
-  "dependencies": {
-    "@babel/preset-env": "^7.4.4"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-preset-es2015": "^6.24.1",
     "http-server": "^0.11.1"
   },
   "scripts": {
     "build": "babel src -d dist",
     "start": "http-server -c-1 -p 8081"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Shefali Upadhyay",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shefsmile/weather-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shefsmile/weather-app/issues"
+  },
+  "homepage": "https://github.com/Shefsmile/weather-app#readme"
 }
